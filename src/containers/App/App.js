@@ -42,7 +42,7 @@ export class App extends Component {
       <div className="App">
         <Header signOut={this.signOut} />
         {!user && <WelcomeModal />}
-        {user && <ChatBox addMessage={this.addMessage} messages={messages} />}
+        {user && <ChatBox addMessage={this.addMessage} />}
       </div>
     );
   }
