@@ -6,7 +6,7 @@ describe('messages reducer', () => {
     const result = messages(undefined, {});
     
     expect(result).toEqual(expected);
-  })
+  });
 
   it('should return the new state with the added message when ADD_MESSAGE action is passed through', () => {
     const expected = [
@@ -23,7 +23,7 @@ describe('messages reducer', () => {
     const result = messages(undefined, actionObject);
 
     expect(result).toEqual(expected);
-  })
+  });
 
   it('should return and empty array when CLEAR_MESSAGES action is passed through', () => {
     const expected = []
@@ -33,5 +33,5 @@ describe('messages reducer', () => {
     const result = messages(undefined, actionObject);
 
     expect(result).toEqual(expected);
-  })
+  });
 })
