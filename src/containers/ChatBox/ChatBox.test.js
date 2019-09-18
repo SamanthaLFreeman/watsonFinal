@@ -85,7 +85,7 @@ describe('ChatBox component', () => {
     expect(wrapper.instance().messageChatBot).toHaveBeenCalled();
   });
 
-  it('should call postMessage and addMessage when calling messageChatBot', async () => {
+  it('should call postMessage and addMessage when calling messageChatBot', async () => { 
     wrapper = mount(<ChatBox
       messages={mockMessages}
       hasErrored={mockHasErrored}
@@ -135,7 +135,11 @@ describe('mapStateToProps', () => {
       errorMsg: ''
     };
     const expected = {
-      errorMsg: ''
+      errorMsg: '',
+      messages: [{
+        message: 'Hi there, my name is Dr. Watson. I understand that you have been feeling happy. That is super exciting to hear!',
+        isUser: false,
+      }]
     };
     const mappedProps = mapStateToProps(mockState);
 
