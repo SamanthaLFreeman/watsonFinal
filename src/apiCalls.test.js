@@ -86,6 +86,16 @@ describe('postMessage', () => {
     expect(postMessage(mockMessage)).resolves.toEqual(mockResponse);
   });
 
+  it('should return an error (SAD) if the property of ok is false', () => {
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.resolve({
+        ok: false
+      });
+    });
+
+    expect(postMessage(mockMessage)).rejects.toEqual(Error('Dr Watson is currently down.  Please try again later.'))
+  });
+
 });
 
 describe('endConversation', () => {
