@@ -7,4 +7,21 @@ describe('messages reducer', () => {
     
     expect(result).toEqual(expected);
   })
+
+  it('should return the new state with the added message when ADD_MESSAGE action is passed through', () => {
+    const expected = [
+      {
+        message: 'Hey Travis and Robbie',
+        isUser: true
+      }
+    ]
+    const actionObject = {
+      type: 'ADD_MESSAGE',
+      message: 'Hey Travis and Robbie',
+      isUser: true
+    }
+    const result = messages(undefined, actionObject);
+
+    expect(result).toEqual(expected);
+  })
 })
