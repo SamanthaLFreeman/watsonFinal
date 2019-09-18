@@ -37,12 +37,11 @@ export class App extends Component {
 
   render() {
     const { user } = this.props;
-    const { messages } = this.state;
     return (
       <div className="App">
         <Header signOut={this.signOut} />
         {!user && <WelcomeModal />}
-        {user && <ChatBox addMessage={this.addMessage} />}
+        {user && <ChatBox />}
       </div>
     );
   }
