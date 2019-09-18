@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { ChatBox, mapStateToProps, mapDispatchToProps } from './ChatBox';
-import { hasErrored } from '../../actions';
+import { hasErrored, addMessage } from '../../actions';
 import { postMessage } from '../../apiCalls';
 
 jest.mock('../../apiCalls');
@@ -25,6 +25,7 @@ describe('ChatBox component', () => {
     wrapper = shallow(<ChatBox
       messages={mockMessages}
       hasErrored={mockHasErrored}
+      addMessage={mockAddMessage}
     />);
   });
 
@@ -37,6 +38,7 @@ describe('ChatBox component', () => {
       messages={mockMessages}
       errorMsg={'fetch failed.'}
       hasErrored={mockHasErrored}
+      addMessage={mockAddMessage}
     />);
 
     expect(wrapper).toMatchSnapshot();
@@ -83,7 +85,7 @@ describe('ChatBox component', () => {
     expect(wrapper.instance().messageChatBot).toHaveBeenCalled();
   });
 
-  it('should call postMessage and addMessage when calling messageChatBot', async () => {
+  it('should call postMessage and addMessage when calling messageChatBot', async () => { 
     wrapper = mount(<ChatBox
       messages={mockMessages}
       hasErrored={mockHasErrored}
@@ -133,7 +135,11 @@ describe('mapStateToProps', () => {
       errorMsg: ''
     };
     const expected = {
-      errorMsg: ''
+      errorMsg: '',
+      messages: [{
+        message: 'Hi there, my name is Dr. Watson. I understand that you have been feeling happy. That is super exciting to hear!',
+        isUser: false,
+      }]
     };
     const mappedProps = mapStateToProps(mockState);
 
@@ -148,6 +154,16 @@ describe('mapDispatchToProps', () => {
 
     const mappedProps = mapDispatchToProps(mockDispatch);
     mappedProps.hasErrored('fetch failed');
+
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  });
+
+  it('calls dispatch with a addMessage action when addMessage is called', () => {
+    const mockDispatch = jest.fn();
+    const actionToDispatch = addMessage('Travis I feel sleepy too!', false);
+
+    const mappedProps = mapDispatchToProps(mockDispatch);
+    mappedProps.addMessage('Travis I feel sleepy too!', false);
 
     expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
   });

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { App, mapStateToProps, mapDispatchToProps } from './App';
-import { removeUser, hasErrored } from '../../actions';
+import { removeUser, hasErrored, clearMessages } from '../../actions';
 import { endConversation } from '../../apiCalls';
 
 jest.mock('../../apiCalls');
@@ -9,6 +9,7 @@ jest.mock('../../apiCalls');
 describe('App component', () => {
   const mockRemoveUser = jest.fn();
   const mockHasErrored = jest.fn();
+  const mockClearMessages = jest.fn();
   let wrapper;
 
   beforeEach(() => {
@@ -23,6 +24,7 @@ describe('App component', () => {
         user={mockUser}
         removeUser={mockRemoveUser}
         hasErrored={mockHasErrored}
+        clearMessages={mockClearMessages}
     />);
   });
 
@@ -35,6 +37,7 @@ describe('App component', () => {
       user={null}
       removeUser={mockRemoveUser}
       hasErrored={mockHasErrored}
+      clearMessages={mockClearMessages}
     />);
 
     expect(wrapper).toMatchSnapshot();
@@ -103,6 +106,16 @@ describe('mapDispatchToProps', () => {
 
     const mappedProps = mapDispatchToProps(mockDispatch);
     mappedProps.hasErrored('fetch failed');
+
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  });
+
+  it('calls dispatch with a clearMessages action when clearMessages is called', () => {
+    const mockDispatch = jest.fn();
+    const actionToDispatch = clearMessages();
+
+    const mappedProps = mapDispatchToProps(mockDispatch);
+    mappedProps.clearMessages();
 
     expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
   });
