@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { createUser, hasErrored } from '../../actions'
+import { createUser, hasErrored, addMessage } from '../../actions'
 import { startConversation } from '../../apiCalls';
-import './WelcomeModal.css'
+import './WelcomeModal.css';
 
 export class WelcomeModal extends Component {
   constructor() {
@@ -39,7 +39,11 @@ export class WelcomeModal extends Component {
   connectToChatBot = async () => {
     try {
       const firstMessage = await startConversation(this.state.feeling);
-      this.props.addMessage(firstMessage.message, false);
+      const message = {
+        message: firstMessage.message,
+        isUser: false
+      }
+      this.props.addMessage(message);
     } catch({ message }) {
       this.props.hasErrored(message);
     }
@@ -80,6 +84,6 @@ export class WelcomeModal extends Component {
   }
 }
 
-export const mapDispatchToProps = dispatch => bindActionCreators({ createUser, hasErrored }, dispatch)
+export const mapDispatchToProps = dispatch => bindActionCreators({ createUser, hasErrored, addMessage }, dispatch)
 
 export default connect(null, mapDispatchToProps)(WelcomeModal);

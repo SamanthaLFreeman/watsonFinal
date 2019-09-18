@@ -41,7 +41,7 @@ export class App extends Component {
     return (
       <div className="App">
         <Header signOut={this.signOut} />
-        {!user && <WelcomeModal addMessage={this.addMessage} />}
+        {!user && <WelcomeModal />}
         {user && <ChatBox addMessage={this.addMessage} messages={messages} />}
       </div>
     );
