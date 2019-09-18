@@ -18,6 +18,28 @@ describe('actions', () => {
     expect(result).toEqual(expectedAction);
   });
 
+  it('should have a type of REMOVE_USER,', () => {
+    const expectedAction = {
+      type: 'REMOVE_USER'
+    }
+
+    const result = actions.removeUser();
+
+    expect(result).toEqual(expectedAction);
+  });
+
+  it('should have a type of HAS_ERRORED,', () => {
+    const mockError = 'There\'s been an error';
+    const expectedAction = {
+      type: 'HAS_ERRORED',
+      errorMsg: mockError
+    }
+
+    const result = actions.hasErrored(mockError);
+
+    expect(result).toEqual(expectedAction);
+  });
+
   it('should have a type of ADD_MESSAGE,', () => {
     const mockMessage = 'Hey Travis and Robbie';
     const mockisUser = true;
