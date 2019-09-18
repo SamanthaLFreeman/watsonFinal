@@ -14,4 +14,14 @@ describe('actions', () => {
 
     expect(result).toEqual(expectedAction);
   })
+
+  it('should have a type of CLEAR_MESSAGES,', () => {
+    const expectedAction = {
+      type: 'CLEAR_MESSAGES'
+    }
+
+    const result = actions.clearMessages();
+
+    expect(result).toEqual(expectedAction);
+  })
 })
