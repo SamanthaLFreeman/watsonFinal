@@ -24,4 +24,14 @@ describe('messages reducer', () => {
 
     expect(result).toEqual(expected);
   })
+
+  it('should return and empty array when CLEAR_MESSAGES action is passed through', () => {
+    const expected = []
+    const actionObject = {
+      type: 'CLEAR_MESSAGES'
+    }
+    const result = messages(undefined, actionObject);
+
+    expect(result).toEqual(expected);
+  })
 })
