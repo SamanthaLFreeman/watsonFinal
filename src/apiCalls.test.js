@@ -82,6 +82,10 @@ describe('postMessage', () => {
     expect(window.fetch).toHaveBeenCalledWith(url, options);
   });
 
+  it('should return a new response message (HAPPY)', () => {
+    expect(postMessage(mockMessage)).resolves.toEqual(mockResponse);
+  });
+
 });
 
 describe('endConversation', () => {
