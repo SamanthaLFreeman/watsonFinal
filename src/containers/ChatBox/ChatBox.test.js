@@ -157,4 +157,14 @@ describe('mapDispatchToProps', () => {
 
     expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
   });
+
+  it('calls dispatch with a addMessage action when addMessage is called', () => {
+    const mockDispatch = jest.fn();
+    const actionToDispatch = addMessage('Travis I feel sleepy too!', false);
+
+    const mappedProps = mapDispatchToProps(mockDispatch);
+    mappedProps.addMessage('Travis I feel sleepy too!', false);
+
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  });
 });
