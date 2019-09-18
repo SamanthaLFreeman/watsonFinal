@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { ChatBox, mapStateToProps, mapDispatchToProps } from './ChatBox';
-import { hasErrored } from '../../actions';
+import { hasErrored, addMessage } from '../../actions';
 import { postMessage } from '../../apiCalls';
 
 jest.mock('../../apiCalls');
@@ -25,6 +25,7 @@ describe('ChatBox component', () => {
     wrapper = shallow(<ChatBox
       messages={mockMessages}
       hasErrored={mockHasErrored}
+      addMessage={mockAddMessage}
     />);
   });
 
@@ -37,6 +38,7 @@ describe('ChatBox component', () => {
       messages={mockMessages}
       errorMsg={'fetch failed.'}
       hasErrored={mockHasErrored}
+      addMessage={mockAddMessage}
     />);
 
     expect(wrapper).toMatchSnapshot();
