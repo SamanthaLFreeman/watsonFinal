@@ -96,6 +96,14 @@ describe('postMessage', () => {
     expect(postMessage(mockMessage)).rejects.toEqual(Error('Dr Watson is currently down.  Please try again later.'))
   });
 
+  it('should return an error if promise rejects (SAD)', () => {
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.reject(Error('fetch failed.'))
+    });
+
+    expect(postMessage(mockMessage)).rejects.toEqual(Error('fetch failed.'))
+  });
+
 });
 
 describe('endConversation', () => {
