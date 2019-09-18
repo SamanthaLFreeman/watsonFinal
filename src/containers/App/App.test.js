@@ -9,6 +9,7 @@ jest.mock('../../apiCalls');
 describe('App component', () => {
   const mockRemoveUser = jest.fn();
   const mockHasErrored = jest.fn();
+  const mockClearMessages = jest.fn();
   let wrapper;
 
   beforeEach(() => {
@@ -23,6 +24,7 @@ describe('App component', () => {
         user={mockUser}
         removeUser={mockRemoveUser}
         hasErrored={mockHasErrored}
+        clearMessages={mockClearMessages}
     />);
   });
 
@@ -35,6 +37,7 @@ describe('App component', () => {
       user={null}
       removeUser={mockRemoveUser}
       hasErrored={mockHasErrored}
+      clearMessages={mockClearMessages}
     />);
 
     expect(wrapper).toMatchSnapshot();
