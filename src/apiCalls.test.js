@@ -52,6 +52,38 @@ describe('startConversation', () => {
   });
 });
 
+describe('postMessage', () => {
+
+  const mockMessage = 'Hey Travis and Robbie!';
+  const mockResponse = {
+    message: 'Sam you should play more video games'
+  };
+
+  beforeEach(() => {
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve(mockResponse)
+      });
+    });
+  });
+
+  it('should call fetch with the correct url', () => {
+    const url = 'https://drwatson-api.herokuapp.com/api/message';
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ newMessage: mockMessage})
+    };
+    postMessage(mockMessage);
+
+    expect(window.fetch).toHaveBeenCalledWith(url, options);
+  });
+
+});
+
 describe('endConversation', () => {
 
   beforeEach(() => {
