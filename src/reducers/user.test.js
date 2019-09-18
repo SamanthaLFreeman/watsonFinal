@@ -28,4 +28,14 @@ describe('user reducer', () => {
 
     expect(result).toEqual(expected);
   });
+
+  it('should return null when REMOVE_USER action is passed through', () => {
+    const expected = null
+    const actionObject = {
+      type: 'REMOVE_USER'
+    }
+    const result = user(undefined, actionObject);
+
+    expect(result).toEqual(expected);
+  });
 })
